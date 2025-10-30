@@ -7,10 +7,16 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.esrac.medses.ui.theme.Dashboard.DashboardScreen
+import com.esrac.medses.ui.theme.Dashboard.DashboardViewModel
+import com.esrac.medses.ui.theme.Login.LoginScreen
+import com.esrac.medses.ui.theme.Login.LoginViewModel
 import com.esrac.medses.ui.theme.MedSesTheme
 
 class MainActivity : ComponentActivity() {
@@ -19,29 +25,35 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             MedSesTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+                MedSesApp()
             }
         }
     }
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
+fun MedSesApp() {
+    val navController = rememberNavController()
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    MedSesTheme {
-        Greeting("Android")
+    Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+        NavHost(
+            navController = navController,
+            startDestination = "login",
+            modifier = Modifier.fillMaxSize()
+                .padding(innerPadding)
+        ) {
+            composable("login") {
+                val loginViewModel: LoginViewModel = viewModel()
+                LoginScreen(
+                    viewModel = loginViewModel,
+                    onLoginSuccess = { navController.navigate("dashboard") }
+                )
+            }
+
+            composable("dashboard") {
+                val dashboardViewModel: DashboardViewModel = viewModel()
+                DashboardScreen(viewModel = dashboardViewModel)
+            }
+        }
     }
 }
