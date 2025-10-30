@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.esrac.medses"
-    compileSdk = 34
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.esrac.medses"
