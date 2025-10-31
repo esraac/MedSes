@@ -45,8 +45,8 @@ fun MedSesApp() {
             composable("login") {
                 val loginViewModel: LoginViewModel = viewModel()
                 LoginScreen(
-                    viewModel = loginViewModel,
-                    onLoginSuccess = { navController.navigate("dashboard") }
+                    navController = navController,
+                    viewModel = loginViewModel
                 )
             }
 

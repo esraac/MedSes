@@ -11,11 +11,12 @@ import com.esrac.medses.ui.theme.Login.LoginScreen
 fun MedSesNavGraph() {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = "login") {
+    NavHost(
+        navController = navController,
+        startDestination = "login"
+    ) {
         composable("login") {
-            LoginScreen(onLoginSuccess = {
-                navController.navigate("dashboard")
-            })
+            LoginScreen(navController = navController)
         }
         composable("dashboard") {
             DashboardScreen()
