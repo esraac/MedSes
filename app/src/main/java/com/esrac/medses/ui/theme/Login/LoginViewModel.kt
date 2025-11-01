@@ -19,6 +19,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.Locale
+
 class LoginViewModel(application: Application) : AndroidViewModel(application) {
 
     var tcKimlik by mutableStateOf("")

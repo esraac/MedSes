@@ -18,6 +18,8 @@ import com.esrac.medses.ui.theme.Dashboard.DashboardViewModel
 import com.esrac.medses.ui.theme.Login.LoginScreen
 import com.esrac.medses.ui.theme.Login.LoginViewModel
 import com.esrac.medses.ui.theme.MedSesTheme
+import com.esrac.medses.ui.theme.Register.RegisterScreen
+import com.esrac.medses.ui.theme.Register.RegisterViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,6 +55,13 @@ fun MedSesApp() {
             composable("dashboard") {
                 val dashboardViewModel: DashboardViewModel = viewModel()
                 DashboardScreen(viewModel = dashboardViewModel)
+            }
+            composable("register"){
+                val registerViewModel: RegisterViewModel = viewModel()
+                RegisterScreen(
+                    navController = navController,
+                    viewModel = registerViewModel
+                )
             }
         }
     }

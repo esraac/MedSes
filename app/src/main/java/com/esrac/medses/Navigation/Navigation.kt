@@ -6,6 +6,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.esrac.medses.ui.theme.Dashboard.DashboardScreen
 import com.esrac.medses.ui.theme.Login.LoginScreen
+import com.esrac.medses.ui.theme.Register.RegisterScreen
 
 @Composable
 fun MedSesNavGraph() {
@@ -20,6 +21,9 @@ fun MedSesNavGraph() {
         }
         composable("dashboard") {
             DashboardScreen()
+        }
+        composable("register") {
+            RegisterScreen(navController = navController)
         }
     }
 }

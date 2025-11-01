@@ -163,6 +163,16 @@ fun LoginScreen(
                 Text("🎤 Mikrofonla Giriş Yap", style = MaterialTheme.typography.titleMedium)
             }
 
+            TextButton(
+                onClick = { navController.navigate("register") }
+            ) {
+                Text(
+                    "Hesabınız yok mu? Kayıt Ol",
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.primary
+                )
+            }
+
             Spacer(modifier = Modifier.height(16.dp))
             if (loginState.isNotBlank()) {
                 Text(
@@ -180,6 +190,7 @@ fun LoginScreen(
                     color = MaterialTheme.colorScheme.primary
                 )
             }
+
         }
     }
 }
