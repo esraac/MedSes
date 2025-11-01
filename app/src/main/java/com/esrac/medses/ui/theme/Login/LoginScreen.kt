@@ -1,15 +1,25 @@
 package com.esrac.medses.ui.theme.Login
 
 import android.Manifest
+import com.esrac.medses.R
 import android.speech.tts.TextToSpeech
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import java.util.*
@@ -50,49 +60,125 @@ fun LoginScreen(
             }
         }
 
-    Scaffold { padding ->
+    Scaffold(
+        modifier = Modifier.fillMaxSize(),
+    ) { paddingValues ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(24.dp),
-            verticalArrangement = Arrangement.Center
+                .padding(paddingValues)
+                .padding(horizontal = 24.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Top
         ) {
-            Text("MedSes - Sesli Giriş", style = MaterialTheme.typography.headlineMedium)
+            Image(
+                painter = painterResource(id = R.drawable.medses),
+                contentDescription = "MedSes Logo",
+                modifier = Modifier.size(160.dp)
+            )
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(10.dp))
+
+            Text(
+                "MedSes Giriş",
+                style = MaterialTheme.typography.headlineLarge.copy(
+                    color = MaterialTheme.colorScheme.secondary,
+                    fontWeight = FontWeight.ExtraBold,
+                    letterSpacing = 1.sp
+                )
+            )
+            Spacer(modifier = Modifier.height(4.dp))
+            Text(
+                "Medikal Sese Hoş Geldiniz!",
+                style = MaterialTheme.typography.titleSmall.copy(
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            )
+
+            Spacer(modifier = Modifier.height(32.dp))
+
             OutlinedTextField(
                 value = tcKimlikState,
-                onValueChange = { tcKimlikState= it },
+                onValueChange = { viewModel.tcKimlik = it },
                 label = { Text("TC Kimlik") },
-                modifier = Modifier.fillMaxWidth()
-            )
+                modifier = Modifier.fillMaxWidth(),
+                singleLine = true,
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
 
-            Spacer(modifier = Modifier.height(8.dp))
-            OutlinedTextField(
-                value = pinState,
-                onValueChange = { pinState = it },
-                label = { Text("4 haneli PIN") },
-                modifier = Modifier.fillMaxWidth()
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedBorderColor = MaterialTheme.colorScheme.primary,
+                    focusedLabelColor = MaterialTheme.colorScheme.primary,
+                    unfocusedBorderColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                    unfocusedLabelColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                    cursorColor = MaterialTheme.colorScheme.primary,
+                )
             )
 
             Spacer(modifier = Modifier.height(16.dp))
-            Button(onClick = { viewModel.signIn() }, modifier = Modifier.fillMaxWidth()) {
-                Text("Giriş Yap")
-            }
 
-            Spacer(modifier = Modifier.height(8.dp))
-            Button(onClick = {
-                requestPermissionLauncher.launch(Manifest.permission.RECORD_AUDIO)
-            }, modifier = Modifier.fillMaxWidth()) {
-                Text("🎤 Mikrofonla Giriş Yap")
+            OutlinedTextField(
+                value = pinState,
+                onValueChange = { viewModel.pin = it },
+                label = { Text("4 haneli PIN") },
+                modifier = Modifier.fillMaxWidth(),
+                singleLine = true,
+
+                visualTransformation = PasswordVisualTransformation(),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedBorderColor = MaterialTheme.colorScheme.primary,
+                    focusedLabelColor = MaterialTheme.colorScheme.primary,
+                    unfocusedBorderColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                    unfocusedLabelColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                    cursorColor = MaterialTheme.colorScheme.primary,
+                )
+            )
+
+            Spacer(modifier = Modifier.height(24.dp))
+
+            Button(
+                onClick = { viewModel.signIn() },
+                modifier = Modifier.fillMaxWidth(),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.primary,
+                    contentColor = MaterialTheme.colorScheme.onPrimary
+                )
+            ) {
+                Text("Giriş Yap", style = MaterialTheme.typography.titleMedium)
             }
 
             Spacer(modifier = Modifier.height(12.dp))
-            Text(loginState)
+
+            Button(
+                onClick = {
+                    requestPermissionLauncher.launch(Manifest.permission.RECORD_AUDIO)
+                },
+                modifier = Modifier.fillMaxWidth(),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.secondary,
+                    contentColor = MaterialTheme.colorScheme.onSecondary
+                )
+            ) {
+                Text("🎤 Mikrofonla Giriş Yap", style = MaterialTheme.typography.titleMedium)
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+            if (loginState.isNotBlank()) {
+                Text(
+                    loginState,
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.error
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+            }
 
             if (isListening) {
-                Spacer(modifier = Modifier.height(8.dp))
-                Text("Dinleniyor...")
+                Text(
+                    "Dinleniyor...",
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.primary
+                )
             }
         }
     }
