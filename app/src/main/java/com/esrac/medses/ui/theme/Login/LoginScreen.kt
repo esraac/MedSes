@@ -190,7 +190,6 @@ fun LoginScreen(
                     color = MaterialTheme.colorScheme.primary
                 )
             }
-
         }
     }
 }
