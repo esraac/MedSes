@@ -195,7 +195,8 @@ fun RegisterScreen(navController: NavController,
                 enabled = isFormValid && !isListening,
                 colors = ButtonDefaults.buttonColors(
                     containerColor = MedSesGreen,
-                    disabledContainerColor = MedSesGreen.copy(alpha = 0.5f)
+                    disabledContainerColor = MedSesGreen.copy(alpha = 0.5f),
+                    contentColor = MedSesWhite
                 ),
                 shape = RoundedCornerShape(4.dp),
                 modifier = Modifier
@@ -227,7 +228,7 @@ fun RegisterScreen(navController: NavController,
                 enabled = !isListening,
                 colors = ButtonDefaults.buttonColors(
                     containerColor = MedSesBlue,
-                    contentColor = Color.White,
+                    contentColor = MedSesWhite,
                     disabledContainerColor = MedSesBlue.copy(alpha = 0.6f)
                 ),
                 shape = RoundedCornerShape(4.dp),

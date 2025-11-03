@@ -22,6 +22,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.esrac.medses.ui.theme.DefaultTextColor
+import com.esrac.medses.ui.theme.MedSesBlue
+import com.esrac.medses.ui.theme.MedSesOrange
+import com.esrac.medses.ui.theme.MedSesWhite
 import java.util.*
 
 @Composable
@@ -82,7 +86,7 @@ fun LoginScreen(
             Text(
                 "MedSes Giriş",
                 style = MaterialTheme.typography.headlineLarge.copy(
-                    color = MaterialTheme.colorScheme.secondary,
+                    color = DefaultTextColor,
                     fontWeight = FontWeight.ExtraBold,
                     letterSpacing = 1.sp
                 )
@@ -91,7 +95,7 @@ fun LoginScreen(
             Text(
                 "Medikal Sese Hoş Geldiniz!",
                 style = MaterialTheme.typography.titleSmall.copy(
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                    color = DefaultTextColor
                 )
             )
 
@@ -141,8 +145,8 @@ fun LoginScreen(
                 onClick = { viewModel.signIn() },
                 modifier = Modifier.fillMaxWidth(),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = MaterialTheme.colorScheme.primary,
-                    contentColor = MaterialTheme.colorScheme.onPrimary
+                    containerColor = MedSesBlue,
+                    contentColor = MedSesWhite
                 )
             ) {
                 Text("Giriş Yap", style = MaterialTheme.typography.titleMedium)
@@ -156,8 +160,8 @@ fun LoginScreen(
                 },
                 modifier = Modifier.fillMaxWidth(),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = MaterialTheme.colorScheme.secondary,
-                    contentColor = MaterialTheme.colorScheme.onSecondary
+                    containerColor = MedSesOrange,
+                    contentColor = MedSesWhite
                 )
             ) {
                 Text("🎤 Mikrofonla Giriş Yap", style = MaterialTheme.typography.titleMedium)
