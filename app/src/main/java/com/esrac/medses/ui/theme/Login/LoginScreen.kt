@@ -29,10 +29,10 @@ fun LoginScreen(
     navController: NavController,
     viewModel: LoginViewModel = viewModel()
 ) {
-    var tcKimlikState = viewModel.tcKimlik
-    var pinState = viewModel.pin
-    var loginState = viewModel.loginState
-    var isListening = viewModel.isListening
+    val tcKimlikState = viewModel.tcKimlik
+    val pinState = viewModel.pin
+    val loginState = viewModel.loginState
+    val isListening = viewModel.isListening
 
     val context = LocalContext.current
     val tts = remember { TextToSpeech(context) {} }

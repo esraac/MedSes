@@ -61,6 +61,7 @@ dependencies {
         implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.2")
         implementation(libs.androidx.navigation.compose)
         implementation(libs.ads.mobile.sdk)
+        implementation("androidx.compose.material:material-icons-extended")
 
         // Retrofit
         implementation("com.squareup.retrofit2:retrofit:2.9.0")
